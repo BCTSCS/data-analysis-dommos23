@@ -60,8 +60,8 @@ public class FileOperator {
     /*
     * Returns an ArrayList of words from a file
     */
-    public static ArrayList<String> getWords(String filename) {
-        createFile(filename);
+    public static ArrayList<String> getWords(String text) {
+        createFile(text);
 
         ArrayList<String> tempList = new ArrayList<String>();
 

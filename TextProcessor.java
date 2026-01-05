@@ -17,17 +17,23 @@ public class TextProcessor {
    * Finds and removes all occurrences of each stop word from textList
    */
   public void removeStopWords(ArrayList<String> stopWords) {
-    for(String stopWord : stopWords){
-      int i = 0;
-      while(i<textList.size()){
-        if(textList.get(i).equals(stopWord)){
-          textList.remove(i);
+    for(String stop : stopWords){
+      for(int i=0; i<textList.size(); i++){
+        String line = textList.get(i);
+        ArrayList<String> words = FileOperator.getWords(line);
+        for(int j=0;j<words.size();j++){
+          if(words.get(j).equals(stop)){
+            words.remove(j);
+            j--;
+          }
+
         }
-        else{
-          i++;
-        }
+
+
+
       }
     }
+    
 
   }
    /*
