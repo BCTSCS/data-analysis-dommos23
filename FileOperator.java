@@ -65,11 +65,10 @@ public class FileOperator {
 
         ArrayList<String> tempList = new ArrayList<String>();
 
-        while (fileReader.hasNext()) {
-        tempList.add(fileReader.next());
+        String[] words = text.split(" ");
+        for(String w : words){
+            tempList.add(w);
         }
-
-        fileReader.close();
         return tempList;
     }
 
