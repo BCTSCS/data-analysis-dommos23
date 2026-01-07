@@ -22,7 +22,7 @@ public class TextProcessor {
         String line = textList.get(i);
         line = line.replaceAll(" "+stop+" ", "");
         line = line.replace(stop+"\n","\n");
-        line = line.startsWith(stop)?line.remove(stop, ""):line;
+        line = line.startsWith(stop) ? line.replaceFirst("^" + stop, "") : line;
         textList.set(i, line);
           }
 
@@ -31,10 +31,8 @@ public class TextProcessor {
 
 
       }
-    }
     
 
-  }
    /*
    * Returns a String containing the text in textList
    */
