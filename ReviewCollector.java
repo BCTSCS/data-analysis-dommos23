@@ -81,8 +81,56 @@ public class ReviewCollector{
     }
 
     public int getNumGoodReviews(String prodName){
-        return 0;
+        int goodCount = 0;
+
+        for(ProductReview elem : reviewList){
+            if(elem.getName().equals(prodName)){
+            String review = elem.getReview();
+            String[] words = review.split(" ");
+            double total = 0.0;
+
+            for(String word : words){
+                total+=getSentiments(word);
+            }
+            if(total>1){
+                goodCount+=1;
+            }
+
+        }
     }
+}
+ public double getSentiments(String wordSearch) {
+       // Read lines from sentiments.txt
+       ArrayList<String> lines = FileOperator.getStringList("sentiments.txt");
+
+
+       // Regex pattern to match word,decimal pairs
+       Pattern pattern = Pattern.compile("([a-zA-Z0-9]+),(-?\\d+\\.\\d+)");
+
+
+
+
+       // Process each line
+       for (String line : lines) {
+           Matcher matcher = pattern.matcher(line);
+           if (matcher.find()) {
+               String word = matcher.group(1); // Extract the word
+               Double value = Double.parseDouble(matcher.group(2)); // Extract the value
+
+
+           
+                               if(wordSearch.equals(word)){
+  // Print the result
+               System.out.println(word + "   ----  " + value);
+
+
+                   return value;
+               }
+            }
+            return 0.0;
+        }
+    }
+
 
     public static void main(String[] args) {
         ReviewCollector reviewCollector = new ReviewCollector();
