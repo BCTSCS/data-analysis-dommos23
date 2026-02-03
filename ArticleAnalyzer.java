@@ -7,26 +7,32 @@ public class ArticleAnalyzer {
 
     private ArrayList<String> stopWords; //load from FileOperators
     private ArrayList<Article> articles; //load from FileOperators json 
-
+    private ArrayList<String> sentimentWords;
+    private ArrayList<Double> sentimentValues;
     public ArticleAnalyzer(){
         stopWords=FileOperator.getStringList("stopwords.txt");
         System.out.println("Stop Word count"+stopWords.size());
         articles=new ArrayList<>();
         System.out.println("Articles count"+articles.size());
 
+        sentimentWords = new ArrayList<>();
+        sentimentValues = new ArrayList<>();
 
 
     }
     public static void main(String[] args) {
-       ArticleAnalyzer riano = new ArticleAnalyzer();
-       ArrayList<String> lines= FileOperator.getStringList("data.txt");
-        for(String line : lines){
+    //    ArticleAnalyzer riano = new ArticleAnalyzer();
+    //    ArrayList<String> lines= FileOperator.getStringList("data.txt");
+    //     for(String line : lines){
     
-       Article a=riano.parseJson(line);
-       String clean = riano.removeStopWords(a.getDescription());
-       a.setDescription(clean);
-       System.out.println(a);
-       riano.articles.add(a);
+    //    Article a=riano.parseJson(line);
+    //    String clean = riano.removeStopWords(a.getDescription());
+    //    a.setDescription(clean);
+    //    System.out.println(a);
+    //    riano.articles.add(a);
+        ArticleAnalyzer riano = new ArticleAnalyzer();
+        ArrayList<String> lines = FileOperator.getStringList("sentiments.txt");
+        
         }
 
        
@@ -45,34 +51,40 @@ public class ArticleAnalyzer {
     public Article parseJson(String jsonLine){
  
         Article result;
-        Pattern l = Pattern.compile("\"link\":\\s*\"([^\"]+)\"");  //regex to extract words
-        Matcher lm =l.matcher(jsonLine); //parameter - line of text
-        String lt = lm.find() ? lm.group(1) : ""; //extract the destined part
+        // Pattern l = Pattern.compile("\"link\":\\s*\"([^\"]+)\"");  //regex to extract words
+        // Matcher lm =l.matcher(jsonLine); //parameter - line of text
+        // String lt = lm.find() ? lm.group(1) : ""; //extract the destined part
 
         
-        Pattern h = Pattern.compile("\"headline\":\\s*\"([^\"]+)\"");  //regex to extract words
-        Matcher hm =h.matcher(jsonLine); //parameter - line of text
-        String ht = hm.find() ? hm.group(1) : ""; //extract the destined part
+        // Pattern h = Pattern.compile("\"headline\":\\s*\"([^\"]+)\"");  //regex to extract words
+        // Matcher hm =h.matcher(jsonLine); //parameter - line of text
+        // String ht = hm.find() ? hm.group(1) : ""; //extract the destined part
         
-        Pattern c = Pattern.compile("\"category\":\\s*\"([^\"]+)\"");  //regex to extract words
-        Matcher cm =c.matcher(jsonLine); //parameter - line of text
-        String ct = cm.find() ? cm.group(1) : ""; //extract the destined part
+        // Pattern c = Pattern.compile("\"category\":\\s*\"([^\"]+)\"");  //regex to extract words
+        // Matcher cm =c.matcher(jsonLine); //parameter - line of text
+        // String ct = cm.find() ? cm.group(1) : ""; //extract the destined part
 
-        Pattern d = Pattern.compile("\"short_description\":\\s*\"([^\"]+)\"");  //regex to extract words
-        Matcher dm =d.matcher(jsonLine); //parameter - line of text
-        String dt = dm.find() ? dm.group(1) : ""; //extract the destined part
+        // Pattern d = Pattern.compile("\"short_description\":\\s*\"([^\"]+)\"");  //regex to extract words
+        // Matcher dm =d.matcher(jsonLine); //parameter - line of text
+        // String dt = dm.find() ? dm.group(1) : ""; //extract the destined part
 
 
-         Pattern a = Pattern.compile("\"authors\":\\s*\"([^\"]+)\"");  //regex to extract words
-        Matcher am =a.matcher(jsonLine); //parameter - line of text
-        String at = am.find() ? am.group(1) : ""; //extract the destined part
+        //  Pattern a = Pattern.compile("\"authors\":\\s*\"([^\"]+)\"");  //regex to extract words
+        // Matcher am =a.matcher(jsonLine); //parameter - line of text
+        // String at = am.find() ? am.group(1) : ""; //extract the destined part
 
-         Pattern t = Pattern.compile("\"date\":\\s*\"([^\"]+)\"");  //regex to extract words
-        Matcher tm =t.matcher(jsonLine); //parameter - line of text
-        String tt = tm.find() ? tm.group(1) : ""; //extract the destined part
+        //  Pattern t = Pattern.compile("\"date\":\\s*\"([^\"]+)\"");  //regex to extract words
+        // Matcher tm =t.matcher(jsonLine); //parameter - line of text
+        // String tt = tm.find() ? tm.group(1) : ""; //extract the destined part
 
         
-        result=new Article(lt, ht, ct, dt, at, tt);
+    Pattern l = Pattern.compile();  //r write regex to extract the word before, and value after
+    Matcher lm =l.matcher(jsonLine); //parameter - line of text
+    boolean found = lm.find(); 
+    String word = found ? lm.group(1) : ""; 
+    Double value = found ? Double.parseDouble(lm.group(2)) : 0.0;
+    System.out.println(word+"   ----  "+value);
+        result=new Article(lm);
 
     return result;
 }
