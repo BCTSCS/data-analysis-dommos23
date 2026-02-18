@@ -4,8 +4,8 @@ import java.util.*;
  * Reads data from a file
  */
 public class FileOperator {
-    private static File myFile;
-    private static Scanner fileReader;
+    public static File myFile;
+    public static Scanner fileReader;
     /*
     * Creates the File and Scanner to read the specified filename
     */
